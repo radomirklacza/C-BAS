@@ -11,13 +11,13 @@
 # The above copyright notice and this permission notice shall be
 # included in all copies or substantial portions of the Work.
 #
-# THE WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS 
-# OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND 
-# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
-# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
-# WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
-# OUT OF OR IN CONNECTION WITH THE WORK OR THE USE OR OTHER DEALINGS 
+# THE WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+# OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+# WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE WORK OR THE USE OR OTHER DEALINGS
 # IN THE WORK.
 #----------------------------------------------------------------------
 
@@ -202,7 +202,7 @@ class Keypair:
         # prob not necc since this cert itself is junk but still...
         m2x509.set_version(2)
         junk_key = Keypair(create=True)
-        m2x509.sign(pkey=junk_key.get_m2_pkey(), md="sha1")
+        m2x509.sign(pkey=junk_key.get_m2_pkey(), md="sha256")
 
         # convert the m2 x509 cert to a pyopenssl x509
         m2pem = m2x509.as_pem()
@@ -297,7 +297,7 @@ class Keypair:
 # whether to save the parent certificates as well.
 
 class Certificate:
-    digest = "md5"
+    digest = "sha256"
 
     cert = None
     issuerKey = None
@@ -358,7 +358,7 @@ class Certificate:
         # load it (support for the ---parent--- tag as well as normal chained certs)
 
         string = string.strip()
-        
+
         # If it's not in proper PEM format, wrap it
         if string.count('-----BEGIN CERTIFICATE') == 0:
             string = '-----BEGIN CERTIFICATE-----\n%s\n-----END CERTIFICATE-----' % string
@@ -367,7 +367,7 @@ class Certificate:
         # such as the text of the certificate, skip the text
         beg = string.find('-----BEGIN CERTIFICATE')
         if beg > 0:
-            # skipping over non cert beginning                                                                                                              
+            # skipping over non cert beginning
             string = string[beg:]
 
         parts = []
@@ -725,11 +725,11 @@ class Certificate:
         # if it wasn't signed by the parent...
         if not self.is_signed_by_cert(self.parent):
             logger.debug("verify_chain: NO. %s is not signed by parent %s, but by %s"%\
-                             (self.get_printable_subject(), 
-                              self.parent.get_printable_subject(), 
+                             (self.get_printable_subject(),
+                              self.parent.get_printable_subject(),
                               self.get_issuer()))
             raise CertNotSignedByParent("%s: Parent %s, issuer %s"\
-                                            % (self.get_printable_subject(), 
+                                            % (self.get_printable_subject(),
                                                self.parent.get_printable_subject(),
                                                self.get_issuer()))
 
@@ -795,3 +795,4 @@ class Certificate:
                 else:
                     result += "    ext: %s (crit=%s)=<<<%s>>>\n"%(n,c,v)
         return result
+

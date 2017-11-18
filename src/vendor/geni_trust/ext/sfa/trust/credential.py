@@ -69,7 +69,7 @@ signature_template = \
       <Transforms>
         <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
       </Transforms>
-      <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+      <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256"/>
       <DigestValue></DigestValue>
     </Reference>
   </SignedInfo>
