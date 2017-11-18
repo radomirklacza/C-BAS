@@ -44,6 +44,8 @@ class OMAv2Delegate(GMAv2DelegateBase):
         of passed fields for a 'create' call; if valid, create this object using
         the resource manager.
         """
+        logger.debug("type_={}".format(type_))
+        logger.debug("fields={}".format(fields))
         fields_copy = copy.copy(fields) if fields else None
         client_ssl_cert = self._gmav2handler.requestCertificate()
 
@@ -131,6 +133,15 @@ class OMAv2Delegate(GMAv2DelegateBase):
             self._delegate_tools.check_if_ma_info_update_authorized(credentials, client_ssl_cert, type_, urn)
             # Removal
             ret_values = self._member_authority_resource_manager.delete_key(urn, credentials, options)
+            # Logging
+            self._logging_authority_resource_manager.append_event_log(authority='ma', method='delete', target_type=type_.upper(),
+                    fields=None, options= options_copy, target_urn=urn, credentials=credentials)
+            return ret_values
+        elif (type_.upper()=='MEMBER'):
+            # Authorization
+            self._delegate_tools.check_if_ma_info_update_authorized(credentials, client_ssl_cert, 'SYSTEM_MEMBER', urn)
+            # Removal
+            ret_values = self._member_authority_resource_manager.delete_member(urn, credentials, options)
             # Logging
             self._logging_authority_resource_manager.append_event_log(authority='ma', method='delete', target_type=type_.upper(),
                     fields=None, options= options_copy, target_urn=urn, credentials=credentials)

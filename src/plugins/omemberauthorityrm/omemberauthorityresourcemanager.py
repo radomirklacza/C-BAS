@@ -146,6 +146,13 @@ class OMemberAuthorityResourceManager(object):
             return self._resource_manager_tools.object_update(self.AUTHORITY_NAME,
                 fields, 'member', {'MEMBER_URN':urn})
 
+    def delete_member(self, urn, credentials, options):
+        """
+        Delete a member object.
+        """
+        return self._resource_manager_tools.object_delete(self.AUTHORITY_NAME,
+            'member', {'MEMBER_URN':urn})
+
     def lookup_member(self, credentials, match, filter_, options):
         """
         Lookup an a member(s).
