@@ -23,6 +23,11 @@ class MongoDB(object):
         """
 
         client = pymongo.MongoClient(ip_hostname, port)
+        self.ip_hostname = ip_hostname
+        self.port = port
+        self.database_name = database_name
+        logger.warning("Connected to DB {}:{}".format(ip_hostname,port))
+        logger.warning("DB name={}".format(database_name))
         self._database = client[database_name]
 
     @serviceinterface
@@ -85,7 +90,7 @@ class MongoDB(object):
         self._database[collection].remove(query)
 
     @serviceinterface
-    def lookup(self, collection, criteria, projection={}):
+    def lookup(self, collection, criteria, projection=None):
         """
         Lookup existing entries within a collection.
 
@@ -102,10 +107,22 @@ class MongoDB(object):
 
         """
 
-        projection['_id'] = False
+        #projection['_id'] = False
+        #projection = None
+        logger.warning("database={}, ip={}, port = {}".format(self.database_name,self.ip_hostname,self.port))
+        logger.warning("collection={}, criteria={}, projection={}".format(collection, criteria, projection))
         result = self._database[collection].find(criteria, projection)
         objects = []
         for _object in result:
+            logger.warning("-"*30)
+            logger.warning("MongoDB Plugin")
+            logger.warning(_object)
+            logger.warning(_object.get("_id"))
+            _object["created"] = str(_object["_id"].generation_time)
+            del _object["_id"]
+            logger.warning(_object.get("created"))
+            logger.warning("-"*30)
+            #ObjectId.getTimestamp()
             objects.append(_object)
 
         return objects

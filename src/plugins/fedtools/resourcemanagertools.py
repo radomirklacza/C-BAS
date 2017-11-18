@@ -177,10 +177,14 @@ class ResourceManagerTools(object):
         # TODO: Convert the prune to whitelist rather than
         match['type'] = type_
         filter_ = self._convert_filter_to_projection(filter_)
+        logger.warning("object_lookup into database")
+        logger.warning("authority = {}, match = {}, filter = {}".format(authority, match, filter_))
         results = self._database.lookup(authority, match, filter_)
+        logger.warning(results)
+        logger.warning("prune")
         for result in results:
             result = self._database.prune_result(result)
-
+        logger.warning(results)
         return results
 
     def _convert_filter_to_projection(self, filter_):
@@ -196,10 +200,13 @@ class ResourceManagerTools(object):
             dictionary of fields that should be present in the 'lookup' result
 
         """
-        projection = {'_id' : False}
+        projection = {}
         for field in filter_:
             projection[field] = True
-        return projection
+        if len(projection) > 0:
+            return projection
+        else:
+            return None
 
 
     @serviceinterface
