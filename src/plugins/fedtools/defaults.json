@@ -184,7 +184,7 @@
             "TYPE": "DATETIME",
             "DESC": "Expiration time of project",
             "MATCH": false,
-            "CREATE": "REQUIRED",
+            "CREATE": "ALLOWED",
             "UPDATE": true
         },
         "PROJECT_EXPIRED": {
