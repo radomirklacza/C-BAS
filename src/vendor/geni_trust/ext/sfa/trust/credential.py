@@ -64,12 +64,12 @@ signature_template = \
 <Signature xml:id="Sig_%s" xmlns="http://www.w3.org/2000/09/xmldsig#">
   <SignedInfo>
     <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
-    <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+    <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
     <Reference URI="#%s">
       <Transforms>
         <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
       </Transforms>
-      <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256"/>
+      <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
       <DigestValue></DigestValue>
     </Reference>
   </SignedInfo>
