@@ -39,6 +39,7 @@ class OMemberAuthorityResourceManager(object):
         """
         super(OMemberAuthorityResourceManager, self).__init__()
         self._resource_manager_tools = pm.getService('resourcemanagertools')
+        self._delegate_tools = pm.getService('delegatetools')
         self._set_unique_keys()
         #<UT>
         config = pm.getService("config")
@@ -323,8 +324,6 @@ class OMemberAuthorityResourceManager(object):
         Return:
             User generated data such as usrn, credentials, etc.
         """
-        first_name = fields['MEMBER_FIRSTNAME']
-        last_name = fields['MEMBER_LASTNAME']
         user_name = fields['MEMBER_USERNAME']
         user_email = fields['MEMBER_EMAIL']
         user_uuid = str(uuid.uuid4())
@@ -352,15 +351,14 @@ class OMemberAuthorityResourceManager(object):
             u_cred = geniutil.create_credential_ex(owner_cert=u_c, target_cert=u_c, issuer_key=self._ma_cert_key_str,
                                                    issuer_cert=self._ma_cert_str, privileges_list=privileges,
                                                    expiration=cred_expiry)
-            registration_fields_member = dict( MEMBER_URN = u_urn,
-                                               MEMBER_FIRSTNAME = first_name,
-                                               MEMBER_LASTNAME 	= last_name,
-                                               MEMBER_USERNAME =  user_name ,
-                                               MEMBER_EMAIL =user_email,
-                                               MEMBER_CERTIFICATE = u_c,
-                                               MEMBER_CREDENTIALS = u_cred,
-                                               MEMBER_UID = user_uuid,
-                                               )
+
+            member_fields = self._delegate_tools.get_fields('MEMBER')
+            registration_fields_member = {k:v for k,v in fields.items() if k in member_fields}
+            registration_fields_member['MEMBER_UID'] = user_uuid
+            registration_fields_member['MEMBER_URN'] = u_urn
+            registration_fields_member['MEMBER_CERTIFICATE'] = u_c
+            registration_fields_member['MEMBER_CREDENTIALS'] = u_cred
+
             self._resource_manager_tools.object_create(self.AUTHORITY_NAME, registration_fields_member, 'member')
 
             # Add certificate key to return values
