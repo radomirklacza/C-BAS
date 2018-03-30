@@ -2,8 +2,7 @@
     "__comment" : "restart the server when updating this file. the keys are case sensitive (depending on the field, the values might as well). do not forget to restart the server after chaning this file.",
 
     "SERVICE" : {
-            "__comment" : "additional fields to further specify the services. the name (key) should be prefixed with an underscore and the federation name. each field specified here must be set in the 'services' section. available field service_types are URN, UID, STRING, DATETIME, EMAIL, KEY, BOOLEAN, CREDENTIAL, CERTIFICATE.",
-            }
+            "__comment" : "additional fields to further specify the services. the name (key) should be prefixed with an underscore and the federation name. each field specified here must be set in the 'services' section. available field service_types are URN, UID, STRING, DATETIME, EMAIL, KEY, BOOLEAN, CREDENTIAL, CERTIFICATE."
         },
 
      "MEMBER" : {
