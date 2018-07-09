@@ -145,7 +145,7 @@ class GMAv2Handler(xmlrpc.Dispatcher):
                type information suitable for passing to aggregates speaking AM API V3.
         """
         try:
-             result = self._delegate.get_credentials(member_urn, credentials, options)
+            result = self._delegate.get_credentials(member_urn, credentials, options)
         except Exception as e:
             return self._api_tools.form_error_return(logger, e)
         return self._api_tools.form_success_return(result)
