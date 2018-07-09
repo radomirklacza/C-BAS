@@ -173,8 +173,10 @@ class OMemberAuthorityResourceManager(object):
         lookup_result = self._resource_manager_tools.object_lookup(self.AUTHORITY_NAME, 'key', {'KEY_ID': fields['KEY_ID']}, [])
         if not lookup_result:
             fields['KEY_PRIVATE'] = '' # Private key is not stored by policy
-            return self._resource_manager_tools.object_create(self.AUTHORITY_NAME,
+            result = self._resource_manager_tools.object_create(self.AUTHORITY_NAME,
                 fields, 'key')
+            self.renew_membership(fields['KEY_MEMBER'])
+            return result
         else:
             raise self.gfed_ex.GFedv2DuplicateError("Key already exists under KEY_ID: "+fields['KEY_ID'])
 
