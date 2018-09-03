@@ -294,8 +294,9 @@ class OMemberAuthorityResourceManager(object):
         cred_expiry = dt.datetime.utcnow() + dt.timedelta(days=self.CERT_VALIDITY_PERIOD)
         u_c,u_pu,u_pr = geniutil.create_certificate(urn=urn, issuer_key=self._ma_cert_key_str,
                                                     issuer_cert=self._ma_cert_str, email=str(user_email),
-                                                    uuidarg=str(user_uuid), serial_number= self._issue_cert_serial_num(),
+                                                    uuidarg=str(user_uuid), serial_number=self._issue_cert_serial_num(),
                                                     life_days=self.CERT_VALIDITY_PERIOD)
+        logger.warning("renew_membership certificate = {}".format())
 
         privileges, _ = geniutil.get_privileges_and_target_urn([{'geni_type': 'geni_sfa', 'geni_version':'3', 'geni_value': member_details['MEMBER_CREDENTIALS']}])
         u_cred = geniutil.create_credential_ex(owner_cert=u_c, target_cert=u_c, issuer_key=self._ma_cert_key_str,

@@ -275,7 +275,6 @@ class DelegateTools(object):
         cred_accepted = False
         for cred in credentials:
             try:
-
                 priv_from_cred, target_urn_from_cred = geniutil.get_privileges_and_target_urn([cred])
                 user_urn_from_cert, _, _ = geniutil.extract_certificate_info(owner_cert)
                 _, cred_typ, _ = geniutil.decode_urn(target_urn_from_cred)
@@ -309,6 +308,7 @@ class DelegateTools(object):
                     cred_accepted = True
                     break
             except Exception as e:
+                logger.exception(e)
                 import traceback
                 traceback.print_exc()
                 #print e
