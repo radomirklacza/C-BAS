@@ -20,12 +20,12 @@ SERVER_CERT_FILE = 'ch-cert.pem'
 SERVER_KEY_FILE = 'ch-key.pem'
 
 ADMIN_NAME = 'root'
-ADMIN_EMAIL = '%s@example.net' %  (ADMIN_NAME,)
+ADMIN_EMAIL = '%s@auth.noc.onelab.eu' %  (ADMIN_NAME,)
 ADMIN_KEY_FILE = '%s-key.pem' %   (ADMIN_NAME,)
 ADMIN_CERT_FILE = '%s-cert.pem' % (ADMIN_NAME,)
 ADMIN_CRED_FILE = '%s-cred.xml' % (ADMIN_NAME,)
 USER_NAME = 'alice'
-USER_EMAIL = '%s@example.com' % (USER_NAME,)
+USER_EMAIL = '%s@auth.noc.onelab.eu' % (USER_NAME,)
 USER_KEY_FILE = '%s-key.pem' % (USER_NAME,)
 USER_CERT_FILE = '%s-cert.pem' % (USER_NAME,)
 USER_CRED_FILE = '%s-cred.xml' % (USER_NAME,)
@@ -38,7 +38,7 @@ BAD_USER_CRED_FILE = '%s-cred.xml' % (BAD_USER_NAME,)
 SLICE_NAME = 'pizzaslice'
 SLICE_CRED_FILE = 'pizzaslice_cred.xml'
 EXPEDIENT_NAME = 'expedient'
-EXPEDIENT_EMAIL = '%s@felix.eu' %  (EXPEDIENT_NAME,)
+EXPEDIENT_EMAIL = '%s@auth.noc.onelab.eu' %  (EXPEDIENT_NAME,)
 EXPEDIENT_KEY_FILE = '%s-key.pem' %   (EXPEDIENT_NAME,)
 EXPEDIENT_CERT_FILE = '%s-cert.pem' % (EXPEDIENT_NAME,)
 EXPEDIENT_CRED_FILE = '%s-cred.xml' % (EXPEDIENT_NAME,)
@@ -206,7 +206,7 @@ if __name__ == "__main__":
               "MEMBER_REMOVE_REGISTRATION", "SERVICE_REGISTER"]
     a_cred = geniutil.create_credential_ex(a_c, a_c, ma_pr, ma_c, p_list, CRED_EXPIRY)
     write_file(dir_path, ADMIN_CRED_FILE, a_cred, opts.silent)
-    insert_user(ADMIN_NAME,urn,a_c,a_cred,admin_uuid,'System', 'Administrator','root@cbas.de', True)
+    insert_user(ADMIN_NAME,urn,a_c,a_cred,admin_uuid,'System', 'Administrator','root@auth.noc.onelab.eu', True)
 
     urn = geniutil.encode_urn(authority, 'user', EXPEDIENT_NAME)
     exp_uuid = str(uuid.uuid4())
@@ -220,7 +220,7 @@ if __name__ == "__main__":
               "MEMBER_REMOVE_REGISTRATION", "SERVICE_REGISTER"]
     a_cred = geniutil.create_credential_ex(a_c, a_c, ma_pr, ma_c, p_list, CRED_EXPIRY)
     write_file(dir_path, EXPEDIENT_CRED_FILE, a_cred, opts.silent)
-    insert_user(EXPEDIENT_NAME,urn,a_c,a_cred,exp_uuid,'Expedient', 'User-agent','expedient@cbas.de')
+    insert_user(EXPEDIENT_NAME,urn,a_c,a_cred,exp_uuid,'Expedient', 'User-agent','expedient@auth.noc.onelab.eu')
 
     if not opts.silent:
         print "Creating slice credential for valid test user"
