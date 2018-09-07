@@ -203,7 +203,7 @@ if __name__ == "__main__":
     write_file(dir_path, ADMIN_KEY_FILE, a_pr, opts.silent)
     p_list = ["GLOBAL_MEMBERS_VIEW", "GLOBAL_MEMBERS_WILDCARDS", "GLOBAL_PROJECTS_MONITOR", "GLOBAL_PROJECTS_VIEW",
               "GLOBAL_PROJECTS_WILDCARDS", "MEMBER_REGISTER", "SERVICE_REMOVE", "SERVICE_VIEW",
-              "MEMBER_REMOVE_REGISTRATION", "SERVICE_REGISTER"]
+              "MEMBER_REMOVE_REGISTRATION", "SERVICE_REGISTER", "info"]
     a_cred = geniutil.create_credential_ex(a_c, a_c, ma_pr, ma_c, p_list, CRED_EXPIRY)
     write_file(dir_path, ADMIN_CRED_FILE, a_cred, opts.silent)
     insert_user(ADMIN_NAME,urn,a_c,a_cred,admin_uuid,'System', 'Administrator','root@auth.noc.onelab.eu', True)
@@ -217,7 +217,7 @@ if __name__ == "__main__":
     write_file(dir_path, EXPEDIENT_KEY_FILE, a_pr, opts.silent)
     p_list = ["GLOBAL_MEMBERS_VIEW", "GLOBAL_MEMBERS_WILDCARDS", "GLOBAL_PROJECTS_MONITOR", "GLOBAL_PROJECTS_VIEW",
               "GLOBAL_PROJECTS_WILDCARDS", "MEMBER_REGISTER", "SERVICE_REMOVE", "SERVICE_VIEW",
-              "MEMBER_REMOVE_REGISTRATION", "SERVICE_REGISTER"]
+              "MEMBER_REMOVE_REGISTRATION", "SERVICE_REGISTER", "info"]
     a_cred = geniutil.create_credential_ex(a_c, a_c, ma_pr, ma_c, p_list, CRED_EXPIRY)
     write_file(dir_path, EXPEDIENT_CRED_FILE, a_cred, opts.silent)
     insert_user(EXPEDIENT_NAME,urn,a_c,a_cred,exp_uuid,'Expedient', 'User-agent','expedient@auth.noc.onelab.eu')
