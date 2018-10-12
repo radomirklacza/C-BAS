@@ -10,4 +10,3 @@ done
 for f in *.json.onelab; do 
     cp -- "$f" "${f%.json.onelab}.json"
 done
-$SCRIPTPATH/test/creds/gen-certs.sh auth.noc.onelab.eu
