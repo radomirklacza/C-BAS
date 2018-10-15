@@ -20,3 +20,17 @@ This work has been partially funded by the Commission of the European Union with
 
 ##Wiki
 Please refer to [wiki section](https://github.com/EICT/C-BAS/wiki) for installation and usage instructions.
+
+
+## Installation (compliant with MySlice v2.0)
+
+This software was tested under Ubuntu 16.04 LTS and Python 2.7. 
+
+1. Clone the repository
+2. Install dependencies 
+    ```sudo ./install_dependencies.sh``` 
+3. Copy default configurations:
+    ```./configure.onelab.sh ```
+4. Update src/plugins/geni_trust/gen-certs.py. Replace auth.onelab.eu with your.domain.com
+5. Generate private key and certificate: 
+    ```sh test/creds/gen-certs.sh your.domain.com```
