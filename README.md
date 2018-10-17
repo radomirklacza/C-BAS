@@ -24,13 +24,42 @@ Please refer to [wiki section](https://github.com/EICT/C-BAS/wiki) for installat
 
 ## Installation (compliant with MySlice v2.0)
 
-This software was tested under Ubuntu 16.04 LTS and Python 2.7. 
+Prerequisites:
+- It is recommended to use python virtualenv
+- It is required to add a DNS entry for your.domain.com that will point into your public IPv4 (for the development purposes you may just add an entry in the /etc/hosts)
+- You need to install git
+
+This software was tested under Ubuntu 16.04LTS / 18.04.1 LTS and Python 2.7. 
 
 1. Clone the repository
+```bash
+git clone git@github.com:radomirklacza/C-BAS.git
+cd C-BAS/
+```
 2. Install dependencies 
-    ```sudo ./install_dependencies.sh``` 
-3. Copy default configurations:
-    ```./configure.onelab.sh ```
-4. Update src/plugins/geni_trust/gen-certs.py. Replace auth.onelab.eu with your.domain.com
-5. Generate private key and certificate: 
-    ```sh test/creds/gen-certs.sh your.domain.com```
+```bash
+sudo ./install_dependencies.sh
+``` 
+
+3. Install python modules (python 2.7):
+
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+4. Copy default configurations:
+```bash 
+./configure.onelab.sh 
+```
+5. Update src/plugins/geni_trust/gen-certs.py. Replace auth.onelab.eu with your.domain.com
+6. Generate private key and certificate: 
+```bash 
+sh test/creds/gen-certs.sh your.domain.com
+```
+7. Start C-BAS: 
+```bash
+sudo sh cbas.sh start
+```
+## Thirs party tools
+### Mongodb GUI client: 
+https://robomongo.org/
