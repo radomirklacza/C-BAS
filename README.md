@@ -60,6 +60,6 @@ sh test/creds/gen-certs.sh your.domain.com
 ```bash
 sudo sh cbas.sh start
 ```
-## Thirs party tools
+## Third party tools
 ### Mongodb GUI client: 
 https://robomongo.org/
